@@ -9,8 +9,11 @@ if (fs.existsSync(srcHtml)) {
   // 读取 HTML 内容
   let content = fs.readFileSync(srcHtml, 'utf8');
   
-  // 修复资源路径（从 ../assets/ 改为 ./assets/）
-  content = content.replace(/\.\.\/assets\//g, './assets/');
+  // Vite 在生产构建时已经使用绝对路径 (/assets/)，不需要修改
+  // 只修复可能的相对路径问题（从 ../assets/ 改为 /assets/）
+  content = content.replace(/\.\.\/assets\//g, '/assets/');
+  // 确保所有 assets 路径都是绝对路径
+  content = content.replace(/\.\/assets\//g, '/assets/');
   
   // 写入到根目录
   fs.writeFileSync(distHtml, content, 'utf8');

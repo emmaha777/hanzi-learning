@@ -2,7 +2,7 @@
 
 ## 🐛 问题原因
 
-图片文件名称大小写不匹配：
+### 问题1：文件名大小写不匹配
 - **HTML 引用**：小写 `blue_closed.png`, `red_closed.png` 等
 - **实际文件**：大写 `Blue_closed.png`, `Red_closed.png` 等
 
@@ -10,8 +10,13 @@
 - macOS 文件系统默认**不区分大小写**，所以本地能正常工作
 - Linux 服务器（Vercel/GitHub Pages）**区分大小写**，找不到文件就显示不出来
 
+### 问题2：路径配置问题
+- Vite 的 `base` 配置使用相对路径 `./` 在 Vercel 上可能有问题
+- 需要改为绝对路径 `/` 以确保在 Vercel 上正常工作
+
 ## ✅ 已修复
 
+### 修复1：文件名大小写
 所有图片文件已重命名为小写，与 HTML 引用一致：
 
 - ✅ `Blue_closed.png` → `blue_closed.png`
@@ -24,6 +29,11 @@
 - ✅ `Red_open.png` → `red_open.png`
 - ✅ `Turquoise_closed.png` → `turquoise_closed.png`
 - ✅ `Turquoise_open.png` → `turquoise_open.png`
+
+### 修复2：路径配置
+- ✅ Vite 配置 `base` 改为 `/`（绝对路径）
+- ✅ 构建脚本确保所有资源路径使用绝对路径
+- ✅ 构建后的 HTML 中图片路径为 `/assets/xxx.png`（绝对路径）
 
 ## 🚀 重新部署
 
