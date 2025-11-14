@@ -9,11 +9,14 @@ if (fs.existsSync(srcHtml)) {
   // 读取 HTML 内容
   let content = fs.readFileSync(srcHtml, 'utf8');
   
-  // Vite 在生产构建时已经使用绝对路径 (/assets/)，不需要修改
-  // 只修复可能的相对路径问题（从 ../assets/ 改为 /assets/）
+  // 由于图片现在在 public 目录中，路径已经是绝对路径 (/assets/)
+  // 只需要确保路径是绝对路径，不修改 public 目录的文件路径
+  // 修复可能的相对路径问题（从 ../assets/ 改为 /assets/）
   content = content.replace(/\.\.\/assets\//g, '/assets/');
-  // 确保所有 assets 路径都是绝对路径
-  content = content.replace(/\.\/assets\//g, '/assets/');
+  // 确保所有 assets 路径都是绝对路径（如果还有相对路径）
+  content = content.replace(/src="\.\/assets\//g, 'src="/assets/');
+  // 确保 logo 路径是绝对路径
+  content = content.replace(/src="\.\/logo\.png"/g, 'src="/logo.png"');
   
   // 写入到根目录
   fs.writeFileSync(distHtml, content, 'utf8');
