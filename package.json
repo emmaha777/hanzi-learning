@@ -1,0 +1,19 @@
+{
+  "name": "hanzi-srs",
+  "version": "1.0.0",
+  "description": "Simple local SRS for learning 500 Chinese characters (localStorage) - beginner friendly",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=src/index.html",
+    "dev": "vite",
+    "build": "vite build && npm run build:fix",
+    "build:fix": "node scripts/fix-build.js",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "vite": "^5.0.0"
+  },
+  "keywords": ["hanzi", "srs", "education"],
+  "license": "MIT"
+}
